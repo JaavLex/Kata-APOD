@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import * as gVar from '../common/global.variables';
 
 @Component({
   selector: 'app-apod-desc',
@@ -12,7 +13,7 @@ export class ApodDescComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get<any>('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY').subscribe(data => {
+    this.http.get<any>(gVar.apiUrl).subscribe(data => {
         this.apodExplanation = data.explanation;
     })
   }
