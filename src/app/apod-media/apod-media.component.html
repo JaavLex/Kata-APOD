@@ -1,5 +1,13 @@
 <div class="wrapper">
   <div class="media-wrapper">
-    <img [src]="apodMedia">
+    <div class="image-wrapper" *ngIf="isImage; else isVideo">
+      <img [src]="apodMedia">
+    </div>
+
+    <ng-template #isVideo>
+      <div class="video-wrapper">
+        <iframe [src]="apodMedia" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </ng-template>
   </div>
 </div>
