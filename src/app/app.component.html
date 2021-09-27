@@ -1,4 +1,8 @@
 <div class="wrapper">
   <app-page-title [titleContent]="appTitleContent"></app-page-title>
-  <app-apod-container></app-apod-container>
+  <div class="interface">
+    <app-apod-nav-button (click)="previousDay()">Previous</app-apod-nav-button>
+    <app-apod-container [apiDate]="selectedDate"></app-apod-container>
+    <app-apod-nav-button (click)="nextDay()">Next</app-apod-nav-button>
+  </div>
 </div>
