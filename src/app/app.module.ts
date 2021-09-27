@@ -7,6 +7,7 @@ import { ApodDescComponent } from './apod-desc/apod-desc.component';
 import { ApodTitleComponent } from './apod-title/apod-title.component';
 import { ApodMediaComponent } from './apod-media/apod-media.component';
 import { ApodContainerComponent } from './apod-container/apod-container.component';
+import { ApodNavButtonComponent } from './apod-nav-button/apod-nav-button.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ApodContainerComponent } from './apod-container/apod-container.componen
     ApodDescComponent,
     ApodTitleComponent,
     ApodMediaComponent,
-    ApodContainerComponent
+    ApodContainerComponent,
+    ApodNavButtonComponent
   ],
   imports: [
     BrowserModule,
