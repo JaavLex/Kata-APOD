@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import * as gVar from '../common/global.variables';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-apod-title',
@@ -8,14 +6,10 @@ import * as gVar from '../common/global.variables';
   styleUrls: ['./apod-title.component.scss']
 })
 export class ApodTitleComponent implements OnInit {
-  apodTitle: string = "";
+  @Input() apiDate: string = "";
+  @Input() apodTitle: string = "";
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.http.get<any>(gVar.apiUrl).subscribe(data => {
-      this.apodTitle = `${data.date}: ${data.title}`;
-  })
-  }
-
+  ngOnInit(): void {}
 }

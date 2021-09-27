@@ -1,6 +1,6 @@
 <div class="wrapper">
-  <app-apod-title></app-apod-title>
-  <app-apod-media></app-apod-media>
-  <app-apod-desc></app-apod-desc>
-  <div class="apod-copyright" *ngif="apodCopyright">Copyright: {{ apodCopyright }}</div>
+  <app-apod-title [apiDate]="apiDate" [apodTitle]="apodTitle"></app-apod-title>
+  <app-apod-media [apiDate]="apiDate" [apodMedia]="apodMedia" [apodMediaType]="apodMediaType"></app-apod-media>
+  <app-apod-desc [apiDate]="apiDate" [apodExplanation]="apodExplanation"></app-apod-desc>
+  <h1 class="apod-copyright" *ngIf="apodCopyright">Copyright: {{ apodCopyright }}</h1>
 </div>
