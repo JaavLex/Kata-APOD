@@ -5,13 +5,15 @@ import { AppComponent } from './app.component';
 import { PageTitleComponent } from './page-title/page-title.component';
 import { ApodDescComponent } from './apod-desc/apod-desc.component';
 import { ApodTitleComponent } from './apod-title/apod-title.component';
+import { ApodMediaComponent } from './apod-media/apod-media.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageTitleComponent,
     ApodDescComponent,
-    ApodTitleComponent
+    ApodTitleComponent,
+    ApodMediaComponent
   ],
   imports: [
     BrowserModule,
