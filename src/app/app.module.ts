@@ -6,6 +6,7 @@ import { PageTitleComponent } from './page-title/page-title.component';
 import { ApodDescComponent } from './apod-desc/apod-desc.component';
 import { ApodTitleComponent } from './apod-title/apod-title.component';
 import { ApodMediaComponent } from './apod-media/apod-media.component';
+import { ApodContainerComponent } from './apod-container/apod-container.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { ApodMediaComponent } from './apod-media/apod-media.component';
     PageTitleComponent,
     ApodDescComponent,
     ApodTitleComponent,
-    ApodMediaComponent
+    ApodMediaComponent,
+    ApodContainerComponent
   ],
   imports: [
     BrowserModule,
