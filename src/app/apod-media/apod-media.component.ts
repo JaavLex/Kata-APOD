@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as gVar from '../common/global.variables';
 
@@ -8,13 +8,16 @@ import * as gVar from '../common/global.variables';
   styleUrls: ['./apod-media.component.scss']
 })
 export class ApodMediaComponent implements OnInit {
-  apodMedia: string = "";
+  @Input() apiDate: string = "";
+  @Input() apodMedia: string = "";
+  @Input() apodMediaType: string = "";
+  isImage: boolean = this.apodMediaType == "image" ? true : false;
 
-  constructor(private http: HttpClient) { }
+  constructor() {}
 
-  ngOnInit(): void {
-    this.http.get<any>(gVar.apiUrl).subscribe(data => {
-      this.apodMedia = data.url;
-    })
+  ngOnInit(): void {}
+
+  ngOnChange(): void {
+    this.isImage = this.apodMediaType == "image" ? true : false;
   }
 }

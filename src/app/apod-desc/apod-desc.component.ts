@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import * as gVar from '../common/global.variables';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-apod-desc',
@@ -8,14 +6,10 @@ import * as gVar from '../common/global.variables';
   styleUrls: ['./apod-desc.component.scss']
 })
 export class ApodDescComponent implements OnInit {
-  apodExplanation: string = "";
+  @Input() apiDate: string = "";
+  @Input() apodExplanation: string = "";
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.http.get<any>(gVar.apiUrl).subscribe(data => {
-        this.apodExplanation = data.explanation;
-    })
-  }
-
+  ngOnInit(): void {}
 }
