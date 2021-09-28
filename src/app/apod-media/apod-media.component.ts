@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import * as gVar from '../common/global.variables';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-apod-media',
@@ -11,13 +10,12 @@ export class ApodMediaComponent implements OnInit {
   @Input() apiDate: string = "";
   @Input() apodMedia: string = "";
   @Input() apodMediaType: string = "";
-  isImage: boolean = this.apodMediaType == "image" ? true : false;
 
-  constructor() {}
+  constructor(private _sanitizer: DomSanitizer) {}
+
+  bypassSecurityURL(url: string) {
+    return this._sanitizer.bypassSecurityTrustResourceUrl(url)
+  }
 
   ngOnInit(): void {}
-
-  ngOnChange(): void {
-    this.isImage = this.apodMediaType == "image" ? true : false;
-  }
 }
