@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ApodTitleComponent implements OnInit {
   @Input() apiDate: string = "";
   @Input() apodTitle: string = "";
+  @Input() apodDate: string = "";
 
   constructor() { }
 
