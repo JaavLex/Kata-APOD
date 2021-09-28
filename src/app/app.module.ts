@@ -8,6 +8,11 @@ import { ApodTitleComponent } from './apod-title/apod-title.component';
 import { ApodMediaComponent } from './apod-media/apod-media.component';
 import { ApodContainerComponent } from './apod-container/apod-container.component';
 import { ApodNavButtonComponent } from './apod-nav-button/apod-nav-button.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
+import { ApiKeyInputComponent } from './api-key-input/api-key-input.component';
+import { ApodArticleComponent } from './apod-article/apod-article.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -17,11 +22,16 @@ import { ApodNavButtonComponent } from './apod-nav-button/apod-nav-button.compon
     ApodTitleComponent,
     ApodMediaComponent,
     ApodContainerComponent,
-    ApodNavButtonComponent
+    ApodNavButtonComponent,
+    ApiKeyInputComponent,
+    ApodArticleComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]
