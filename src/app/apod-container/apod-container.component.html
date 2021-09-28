@@ -1,6 +1,11 @@
 <div class="wrapper">
-  <app-apod-title [apiDate]="apiDate" [apodTitle]="apodTitle"></app-apod-title>
-  <app-apod-media [apiDate]="apiDate" [apodMedia]="apodMedia" [apodMediaType]="apodMediaType"></app-apod-media>
-  <app-apod-desc [apiDate]="apiDate" [apodExplanation]="apodExplanation"></app-apod-desc>
-  <h1 class="apod-copyright" *ngIf="apodCopyright">Copyright: {{ apodCopyright }}</h1>
+  <div class="app-container" *ngIf="isAPIKeyPresent; else apiModal">
+    <app-apod-article [apiDate]="apiDate"></app-apod-article>
+  </div>
+  
+  <ng-template #apiModal>
+    <div class="api-key-container">
+      <app-api-key-input (apiKey)="transmitAPIKey($event)"></app-api-key-input>
+    </div>
+  </ng-template>
 </div>
