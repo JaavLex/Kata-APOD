@@ -6,11 +6,11 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./apod-nav-button.component.scss']
 })
 export class ApodNavButtonComponent implements OnInit {
-  
+  @Input() isEnabled: boolean = true;
+  @Input() insideContent: string = "";
+
   constructor() { }
 
   ngOnInit(): void {
   }
-
-  @Input() rArrow: boolean = true;
 }
