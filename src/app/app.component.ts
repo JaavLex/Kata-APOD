@@ -8,11 +8,35 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title: string = 'kataapod';
   appTitleContent: string = "APOD Navigator / Browser";
+  isAPIKeyPresent: boolean = false;
   todayDate: Date = new Date();
-  selectedDateUnformatted: Date = this.todayDate;
+  selectedDateUnformatted: Date = new Date();
   selectedDate: string = "";
+  apiKey: any = localStorage.getItem('jaavlex-apod-api-key');
 
-  formatDate(date: Date) {
+  localStorageChecker(): void {
+    localStorage.getItem('jaavlex-apod-api-key') == null ? this.isAPIKeyPresent = false : this.isAPIKeyPresent = true;
+  }
+
+  navigatorChecker(): boolean {
+    return this.formatDate(this.todayDate) != this.formatDate(this.selectedDateUnformatted);
+  }
+
+  ngOnInit(): void {
+    this.localStorageChecker();
+    this.selectedDate = this.formatDate(this.todayDate);
+  }
+
+  ngOnChanges(): void {
+    this.localStorageChecker();
+  }
+
+  getApiKey(event: any): void {
+    localStorage.setItem('jaavlex-apod-api-key', event);
+    localStorage.getItem('jaavlex-apod-api-key') == null ? this.isAPIKeyPresent = false : this.isAPIKeyPresent = true;
+  }
+
+  formatDate(date: Date): string {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
@@ -25,14 +49,17 @@ export class AppComponent {
 
     return [year, month, day].join('-');
   }
-  
-  previousDay() {
-    this.selectedDateUnformatted.setDate(this.selectedDateUnformatted.getDate() - 1)
+
+  pageNavigator(nbPages: number): void {
+    this.selectedDateUnformatted.setDate(this.selectedDateUnformatted.getDate() + nbPages);
     this.selectedDate = this.formatDate(this.selectedDateUnformatted);
   }
+  
+  previousDay(): void {
+    this.pageNavigator(-1);
+  }
 
-  nextDay() {
-    this.selectedDateUnformatted.setDate(this.selectedDateUnformatted.getDate() + 1)
-    this.selectedDate = this.formatDate(this.selectedDateUnformatted);
+  nextDay(): void {
+    this.navigatorChecker() && this.pageNavigator(1);
   }
 }

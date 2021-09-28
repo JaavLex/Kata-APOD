@@ -1,8 +1,11 @@
 <div class="wrapper">
+  <header>
+    Made by JaavLex - <a href="https://github.com/JaavLex/Kata-APOD">Source code</a>
+  </header>
   <app-page-title [titleContent]="appTitleContent"></app-page-title>
   <div class="interface">
-    <app-apod-nav-button (click)="previousDay()">Previous</app-apod-nav-button>
-    <app-apod-container [apiDate]="selectedDate"></app-apod-container>
-    <app-apod-nav-button (click)="nextDay()">Next</app-apod-nav-button>
+    <app-apod-nav-button [insideContent]="'⇦'" (click)="previousDay()" *ngIf="isAPIKeyPresent"></app-apod-nav-button>
+    <app-apod-container [apiDate]="selectedDate" [isAPIKeyPresent]="isAPIKeyPresent" (apiKey)="getApiKey($event)"></app-apod-container>
+    <app-apod-nav-button [insideContent]="'⇨'" [isEnabled]="navigatorChecker()" (click)="nextDay()" *ngIf="isAPIKeyPresent"></app-apod-nav-button>
   </div>
 </div>
