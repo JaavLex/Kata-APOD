@@ -1,8 +1,19 @@
 .optional {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+}
+
+.interactive {
+  display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: 8px;
+}
+
+p {
+  font-size: 12px;
 }
 
 input {
@@ -20,5 +31,5 @@ button {
   height: 40px;
   border-radius: 50%;
   border-color: transparent;
-  background-color: #73be50a4;
+  background-color: transparent;
 }
