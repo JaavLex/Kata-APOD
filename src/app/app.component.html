@@ -1,7 +1,4 @@
 <div class="wrapper">
-  <header>
-    Made by JaavLex - <a href="https://github.com/JaavLex/Kata-APOD">Source code</a>
-  </header>
   <app-page-title [titleContent]="appTitleContent"></app-page-title>
   <div class="interface">
     <app-apod-nav-button [insideContent]="'⇦'" (click)="previousDay()" *ngIf="isAPIKeyPresent"></app-apod-nav-button>
