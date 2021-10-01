@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="app-container" *ngIf="isAPIKeyPresent; else apiModal">
-    <app-apod-article [apiDate]="apiDate"></app-apod-article>
+    <app-apod-article [apiService]="apiService" [apiDate]="apiDate"></app-apod-article>
   </div>
   
   <ng-template #apiModal>
