@@ -2,7 +2,7 @@
   <app-page-title [titleContent]="appTitleContent"></app-page-title>
   <div class="interface">
     <app-apod-nav-button [insideContent]="'⇦'" (click)="previousDay()" *ngIf="isAPIKeyPresent"></app-apod-nav-button>
-    <app-apod-container [apiDate]="selectedDate" [isAPIKeyPresent]="isAPIKeyPresent" (apiKey)="getApiKey($event)"></app-apod-container>
+    <app-apod-container [apiService]="apiService" [apiDate]="selectedDate" [isAPIKeyPresent]="isAPIKeyPresent" (apiKey)="getApiKey($event)"></app-apod-container>
     <app-apod-nav-button [insideContent]="'⇨'" [isEnabled]="navigatorChecker()" (click)="nextDay()" *ngIf="isAPIKeyPresent"></app-apod-nav-button>
   </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiService } from './services/api/api.service';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,10 @@ export class AppComponent {
   selectedDateUnformatted: Date = new Date();
   selectedDate: string = "";
   apiKey: any = localStorage.getItem('jaavlex-apod-api-key');
+
+  constructor(public apiService: ApiService) { 
+    this.apiService.apiUrlManager('set', 'https://api.nasa.gov/planetary/apod');
+  }
 
   localStorageChecker(): void {
     localStorage.getItem('jaavlex-apod-api-key') == null ? this.isAPIKeyPresent = false : this.isAPIKeyPresent = true;
