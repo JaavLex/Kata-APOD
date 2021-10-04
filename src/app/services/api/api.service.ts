@@ -40,7 +40,7 @@ export class ApiService {
     }
   }
 
-  apiParamsManager(managerRequest: 'get' | 'set', apiParam: string, paramVal?: string | null): void | string | null {
+  apiParamsManager(managerRequest: 'get' | 'set' | 'update', apiParam: string, paramVal?: string | null): void | string | null {
     switch(managerRequest) {
       case 'get':
         if (apiParam) {
@@ -63,17 +63,61 @@ export class ApiService {
           throw new Error('ERROR: apiParam or paramVal is empty or null, you must specify it/them')
         }
         break;
+      case 'update':
+        if (apiParam && paramVal) {
+          if (this.API_PARAMS)
+            try {
+              this.API_PARAMS[apiParam] = paramVal;
+            } catch (error) {
+              throw new Error('ERROR: This parameter does not exist')
+            }
+          else 
+            throw new Error('ERROR: There is no parameters')
+        } else {
+          throw new Error('ERROR: apiParam or paramVal is empty or null, you must specify it/them')
+        }
+        break;
       default:
         throw new Error('ERROR: Type of request is unknown')
     }
   }
 
-  async getApiData(apiDate: string): Promise<any> {
+  async getApiData(): Promise<any> {
     if (this.API_KEY) {
-      return await fetch(`${this.API_URL}?api_key=${this.API_KEY}&date=${apiDate}`)
+      var formattedParams: string = "";
+      if (this.API_PARAMS) {
+        var index: number = 0;
+        var length: number = Object.entries(this.API_PARAMS).length;
+        Object.entries(this.API_PARAMS).forEach(([key, value]) => {
+          formattedParams += index == 0 && '&';
+          formattedParams += index < length && length > 1 ? `${key}=${value}&` : `${key}=${value}`
+          index++;
+        })
+      }
+      return await fetch(`${this.API_URL}?api_key=${this.API_KEY}` + formattedParams)
         .then(data => {return data.json()})
     } else {
       throw new Error(`ERROR: You MUST have set an api key with 'setApiKey()' before getting data`)
+    }
+  }
+
+  debug(): void {
+    var formattedParams: string = "";
+    console.log('--- CURRENT API SERVICE CONFIGURATION ---')
+    console.log('CURRENT API URL: ' + this.API_URL)
+    console.log('CURRENT API KEY: ' + this.API_KEY)
+    if (this.API_PARAMS) {
+      var index: number = 0;
+      var length: number = Object.entries(this.API_PARAMS).length;
+      Object.entries(this.API_PARAMS).forEach(([key, value]) => {
+        formattedParams += index == 0 && '&';
+        formattedParams += index < length && length > 1 ? `${key}=${value}&` : `${key}=${value}`
+        index++;
+      }) 
+      console.log('CURRENT FULL URL: ' + `${this.API_URL}?api_key=${this.API_KEY}` + formattedParams)
+      console.log('CURRENT API PARAMETERS: ' + formattedParams)
+    } else {
+      console.log('CURRENT FULL URL: ' + `${this.API_URL}?api_key=${this.API_KEY}`)
     }
   }
 }
