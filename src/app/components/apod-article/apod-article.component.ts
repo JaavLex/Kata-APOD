@@ -13,16 +13,18 @@ export class ApodArticleComponent implements OnInit {
 
   constructor() { }
 
-  async apiDataSet(): Promise<any> {
-    this.apodData = await this.apiService.getApiData(this.apiDate);
+  async apiDataSet(mode: 'init' | 'update'): Promise<any> {
+    mode === 'update' && this.apiService.apiParamsManager('update', 'date', this.apiDate);
+    this.apodData = await this.apiService.getApiData();
   }
-  
+
   ngOnInit(): void {
     this.apiService.apiKeyManager('set', localStorage.getItem('jaavlex-apod-api-key'))
-    this.apiDataSet();
+    this.apiService.apiParamsManager('set', 'date', this.apiDate);
+    this.apiDataSet('init');
   }
 
   ngOnChanges(): void {
-    this.apiDataSet();
+    this.apiDataSet('update');
   }
 }
