@@ -42,10 +42,12 @@ export class ApiService {
     }
   }
 
-  apiKeyManager(managerRequest: 'get' | 'set', apiKey?: string | null, apiKeyParam?: string | null): void | string | null {
+  apiKeyManager(managerRequest: 'get_key' | 'get_param' | 'set', apiKey?: string | null, apiKeyParam?: string | null): void | string | null {
     switch(managerRequest) {
-      case 'get':
+      case 'get_key':
         return this.API_KEY
+      case 'get_param':
+        return this.API_KEY_PARAM
       case 'set':
         if (apiKey && apiKeyParam) {
           this.API_KEY = apiKey
