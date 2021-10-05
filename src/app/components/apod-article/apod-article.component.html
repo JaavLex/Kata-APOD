@@ -1,6 +1,6 @@
 <div class="app-container">
   <app-apod-title [apodTitle]="apodData.title" [apodDate]="apodData.date"></app-apod-title>
-  <app-apod-media [apodMedia]="apodData.url" [apodMediaType]="apodData.media_type"></app-apod-media>
+  <app-apod-media [apodMedia]="apodData.url" [apodMediaHD]="apodData.hdurl" [apodMediaType]="apodData.media_type"></app-apod-media>
   <app-apod-desc [apodExplanation]="apodData.explanation"></app-apod-desc>
   <h6 class="apod-copyright" *ngIf="apodData.copyright">Copyright: {{ apodData.copyright }}</h6>
 </div>

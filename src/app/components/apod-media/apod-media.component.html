@@ -1,7 +1,12 @@
 <div class="wrapper">
   <div class="media-wrapper">
     <div class="image-wrapper" *ngIf="apodMediaType === 'image'; else isVideo">
-      <img [src]="apodMedia">
+      <a [href]="apodMediaHD" *ngIf="apodMediaHD != null; else noHD">
+        <img [src]="apodMedia">
+      </a>
+      <ng-template #noHD>
+        <img [src]="apodMedia">
+      </ng-template>
     </div>
 
     <ng-template #isVideo>

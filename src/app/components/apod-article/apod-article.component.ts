@@ -22,6 +22,7 @@ export class ApodArticleComponent implements OnInit {
     this.apiService.apiKeyManager('set', localStorage.getItem('jaavlex-apod-api-key'), 'api_key')
     this.apiService.apiParamsManager('set', 'date', this.apiDate);
     this.apiDataSet('init');
+    this.apiService.debug()
   }
 
   ngOnChanges(): void {

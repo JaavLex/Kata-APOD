@@ -9,6 +9,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class ApodMediaComponent implements OnInit {
   @Input() apiDate: string = "";
   @Input() apodMedia: string = "";
+  @Input() apodMediaHD: string | null = null;
   @Input() apodMediaType: string = "";
 
   constructor(private _sanitizer: DomSanitizer) {}
