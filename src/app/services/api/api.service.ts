@@ -10,6 +10,22 @@ export class ApiService {
 
   constructor() { }
 
+  paramsFormatter(): string {
+    var formattedParams: string = "";
+    if (this.API_PARAMS) {
+      var index: number = 0;
+      var length: number = Object.entries(this.API_PARAMS).length;
+      Object.entries(this.API_PARAMS).forEach(([key, value]) => {
+        formattedParams += index == 0 && '&';
+        formattedParams += index < length && length > 1 ? `${key}=${value}&` : `${key}=${value}`
+        index++;
+      }) 
+      return formattedParams;
+    } else {
+      return '';
+    }
+  }
+
   apiUrlManager(managerRequest: 'get' | 'set', apiUrl?: string | null): void | string | null {
     switch(managerRequest) {
       case 'get':
@@ -84,17 +100,7 @@ export class ApiService {
 
   async getApiData(): Promise<any> {
     if (this.API_KEY) {
-      var formattedParams: string = "";
-      if (this.API_PARAMS) {
-        var index: number = 0;
-        var length: number = Object.entries(this.API_PARAMS).length;
-        Object.entries(this.API_PARAMS).forEach(([key, value]) => {
-          formattedParams += index == 0 && '&';
-          formattedParams += index < length && length > 1 ? `${key}=${value}&` : `${key}=${value}`
-          index++;
-        })
-      }
-      return await fetch(`${this.API_URL}?api_key=${this.API_KEY}` + formattedParams)
+      return await fetch(`${this.API_URL}?api_key=${this.API_KEY}${this.paramsFormatter()}`)
         .then(data => {return data.json()})
     } else {
       throw new Error(`ERROR: You MUST have set an api key with 'setApiKey()' before getting data`)
@@ -102,22 +108,11 @@ export class ApiService {
   }
 
   debug(): void {
-    var formattedParams: string = "";
-    console.log('--- CURRENT API SERVICE CONFIGURATION ---')
-    console.log('CURRENT API URL: ' + this.API_URL)
-    console.log('CURRENT API KEY: ' + this.API_KEY)
-    if (this.API_PARAMS) {
-      var index: number = 0;
-      var length: number = Object.entries(this.API_PARAMS).length;
-      Object.entries(this.API_PARAMS).forEach(([key, value]) => {
-        formattedParams += index == 0 && '&';
-        formattedParams += index < length && length > 1 ? `${key}=${value}&` : `${key}=${value}`
-        index++;
-      }) 
-      console.log('CURRENT FULL URL: ' + `${this.API_URL}?api_key=${this.API_KEY}` + formattedParams)
-      console.log('CURRENT API PARAMETERS: ' + formattedParams)
-    } else {
-      console.log('CURRENT FULL URL: ' + `${this.API_URL}?api_key=${this.API_KEY}`)
-    }
+    console.log('+------------- CURRENT API SERVICE CONFIGURATION DEBUG ----------')
+    console.log('| CURRENT API URL: ' + this.API_URL)
+    console.log('| CURRENT API KEY: ' + this.API_KEY)
+    console.log('| CURRENT API PARAMETERS: ' + this.paramsFormatter())
+    console.log('| CURRENT FULL URL: ' + `${this.API_URL}?api_key=${this.API_KEY}${this.paramsFormatter()}`)
+    console.log('+----------------------------------------------------------------')
   }
 }
