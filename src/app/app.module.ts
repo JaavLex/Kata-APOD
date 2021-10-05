@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ApiKeyInputComponent } from './components/api-key-input/api-key-input.component';
 import { ApodArticleComponent } from './components/apod-article/apod-article.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { BasicButtonComponent } from './components/basic-button/basic-button.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ApodContainerComponent,
     ApodNavButtonComponent,
     ApiKeyInputComponent,
-    ApodArticleComponent
+    ApodArticleComponent,
+    BasicButtonComponent
   ],
   imports: [
     BrowserModule,

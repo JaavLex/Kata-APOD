@@ -41,6 +41,11 @@ export class AppComponent {
     localStorage.getItem('jaavlex-apod-api-key') == null ? this.isAPIKeyPresent = false : this.isAPIKeyPresent = true;
   }
 
+  removeApiKey(): void {
+    localStorage.removeItem('jaavlex-apod-api-key');
+    localStorage.getItem('jaavlex-apod-api-key') == null ? this.isAPIKeyPresent = false : this.isAPIKeyPresent = true;
+  }
+
   formatDate(date: Date): string {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),

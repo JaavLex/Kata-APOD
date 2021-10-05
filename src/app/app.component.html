@@ -5,4 +5,5 @@
     <app-apod-container [apiService]="apiService" [apiDate]="selectedDate" [isAPIKeyPresent]="isAPIKeyPresent" (apiKey)="getApiKey($event)"></app-apod-container>
     <app-apod-nav-button [insideContent]="'⇨'" [isEnabled]="navigatorChecker()" (click)="nextDay()" *ngIf="isAPIKeyPresent"></app-apod-nav-button>
   </div>
+  <app-basic-button [insideContent]="'✖︎ CHANGE API KEY'" (click)="removeApiKey()" *ngIf="isAPIKeyPresent"></app-basic-button>
 </div>
