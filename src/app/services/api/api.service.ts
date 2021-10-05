@@ -5,12 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class ApiService {
   API_KEY: string | null | undefined = null;
+  API_KEY_PARAM: string | null | undefined = null;
   API_URL: string | null | undefined = null;
   API_PARAMS: {[key: string]: string} | null = null;
 
   constructor() { }
 
-  paramsFormatter(): string {
+  paramsFormatter(): string | void{
     var formattedParams: string = "";
     if (this.API_PARAMS) {
       var index: number = 0;
@@ -41,15 +42,17 @@ export class ApiService {
     }
   }
 
-  apiKeyManager(managerRequest: 'get' | 'set', apiKey?: string | null): void | string | null {
+  apiKeyManager(managerRequest: 'get' | 'set', apiKey?: string | null, apiKeyParam?: string | null): void | string | null {
     switch(managerRequest) {
       case 'get':
         return this.API_KEY
       case 'set':
-        if (apiKey)
+        if (apiKey && apiKeyParam) {
           this.API_KEY = apiKey
-        else
-          throw new Error('ERROR: apiKey is empty or null, you must specify it')
+          this.API_KEY_PARAM = apiKeyParam
+        } else {
+          throw new Error('ERROR: apiKey or apiKeyParam is empty or null, you must specify it')
+        }
         break;
       default:
         throw new Error('ERROR: Type of request is unknown')
@@ -100,7 +103,7 @@ export class ApiService {
 
   async getApiData(): Promise<any> {
     if (this.API_KEY) {
-      return await fetch(`${this.API_URL}?api_key=${this.API_KEY}${this.paramsFormatter()}`)
+      return await fetch(`${this.API_URL}?${this.API_KEY_PARAM}=${this.API_KEY}${this.paramsFormatter()}`)
         .then(data => {return data.json()})
     } else {
       throw new Error(`ERROR: You MUST have set an api key with 'setApiKey()' before getting data`)
@@ -112,7 +115,7 @@ export class ApiService {
     console.log('| CURRENT API URL: ' + this.API_URL)
     console.log('| CURRENT API KEY: ' + this.API_KEY)
     console.log('| CURRENT API PARAMETERS: ' + this.paramsFormatter())
-    console.log('| CURRENT FULL URL: ' + `${this.API_URL}?api_key=${this.API_KEY}${this.paramsFormatter()}`)
+    console.log('| CURRENT FULL URL: ' + `${this.API_URL}?${this.API_KEY_PARAM}=${this.API_KEY}${this.paramsFormatter()}`)
     console.log('+----------------------------------------------------------------')
   }
 }
